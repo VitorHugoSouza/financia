@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { db } from 'services/firebase';
-import { ref, onValue} from "firebase/database";
 
 import { Card, Col, Divider, Row } from 'antd';
 import { BulbOutlined, FormOutlined, RedoOutlined } from '@ant-design/icons';
@@ -12,34 +10,7 @@ export default function Monitoramento() {
 	const [dadosPlaca1, setDadosPlaca1] = useState([]);
 	const [dadosPlaca2, setDadosPlaca2] = useState([]);
 
-	function getPlaca1() {
-		const distanciaRef = ref(db, 'placa-1');
-		
-		return onValue(distanciaRef, (placa) => {
-			if(placa.exists()) {
-				console.log('placa1 atualizada ==>', placa.val());
-				setDadosPlaca1(placa.val());
-			}
-		});
-	}	
-
-	function getPlaca2() {
-		const distanciaRef = ref(db, 'placa-2');
-		
-		return onValue(distanciaRef, (placa) => {
-			if(placa.exists()) {
-				console.log('placa2 atualizada ==>', placa.val());
-				setDadosPlaca2(placa.val());
-			}
-		});
-	}	
 	
-	useEffect(() => {
-
-		getPlaca1();
-		getPlaca2();
-
-  }, []);
 
 	return (
 		<div>
