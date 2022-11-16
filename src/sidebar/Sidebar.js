@@ -2,7 +2,7 @@ import { Image } from 'antd';
 import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout';
 import Monitoramento from 'monitoramento/Monitoramento';
 import './Sidebar.css';
-import Comp from 'assets/img/logo-comp.png';
+import Comp from 'assets/img/logo_financia_t.png';
 
 export default function Sidebar() {
 	return (
@@ -20,7 +20,7 @@ export default function Sidebar() {
 				</div>
 
 				<div>
-					<h3 style={{ color: '#FFFFFF' }}>SISTEMA DE MONITORAMENTO ONLINE</h3>
+					<h3 style={{ color: '#FFFFFF' }}> PERFORMANCE EM ANÁLISE DE CLIENTES</h3>
 				</div>
 
 			</Header>
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
 			</Content>
 
-			<Footer style={{ textAlign: 'center' }}>Vitor Hugo de Souza - Vladson Ramos ©2021</Footer>
+			<Footer style={{ textAlign: 'center' }}>Vitor Hugo de Souza ©2022</Footer>
 
 		</Layout>
 	);

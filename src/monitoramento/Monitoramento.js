@@ -1,131 +1,142 @@
 import React, { useEffect, useState } from 'react';
 
-import { Card, Col, Divider, Row } from 'antd';
-import { BulbOutlined, FormOutlined, RedoOutlined } from '@ant-design/icons';
+import { Button, Card, Col, Divider, Form, Input, Radio, Row, Select } from 'antd';
+import { BulbOutlined, CheckOutlined, FormOutlined, RedoOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import './Monitoramento.css';
 
+const formAnalise = {
+	dataNascimento: '',
+	sexo: '',
+	moradia: '',
+	renda: '',
+	tipoRenda: ''
+}
+
 export default function Monitoramento() {
 
-	const [dadosPlaca1, setDadosPlaca1] = useState([]);
-	const [dadosPlaca2, setDadosPlaca2] = useState([]);
+	const { Option } = Select;
+	const [dados, setDados] = useState(formAnalise);
 
-	
+	function onChangeDN(e) {
+		setDados({...dados, dataNascimento:e.target.value});
+	}
+
+	function onChangeSexo(e) {
+		setDados({...dados, sexo:e.target.value});
+	}
+
+	function onChangeTM(e) {
+		setDados({...dados, moradia:e.target.value});
+	}
+
+	function onChangeRenda(e) {
+		setDados({...dados, renda:e.target.value});
+	}
+
+	function onChangeTR(e) {
+		setDados({...dados, tipoRenda:e.target.value});
+	}
+
+	console.log(dados.dataNascimento);
+	console.log(dados.sexo);
+	console.log(dados.moradia);
+	console.log(dados.tipoRenda);
+
+
+	function onSubmitForm(e) {
+		e.preventDefault();
+
+		console.log("formulário enviado");
+	}
 
 	return (
 		<div>
 
-			<h3>Bem vindo ao sistema de monitoramento online!</h3>
+			<h3>Preencha os campos a seguir para realizar a análise!</h3>
 
 			<div style={{ marginTop: '30px'}}>	
 
-				<h3>Placa primária </h3>	
+				<form onSubmit={onSubmitForm}>
 
-				<Row gutter={16}>
+					<Row gutter={8}>
 
+						<Col span={8}>
 
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<FormOutlined />}
-								title="Controle de volume"
-								style={{ marginBottom: '10px' }}
+							<Input 
+								style={{ width: 300 }}
+								name="dataNascimento"
+								placeholder="Informe a data de nascimento"
+								onChange={onChangeDN}
+								value={dados.dataNascimento} 
 							/>
 
-							{dadosPlaca1.distancia <= 5 ? <p style={{ color: 'red' }}><b>Volume inferior a 5 m³. Nivel crítico!</b></p> : <p style={{ color: 'green' }}>Volume em bom nível!</p>}
+							<Select
+								placeholder="Informe o sexo"
+								name="sexo"
+								onChange={onChangeSexo}
+								style={{
+									width: 300,
+									marginTop: '30px'
+								}}
+							>
+								<Option value="feminino">Feminino</Option>
+								<Option value="masculino">Masculino</Option>
+							</Select>
 
-						</Card>
-					</Col>
+							<Select
+								placeholder="Informe o tipo de moradia"
+								name="moradia"
+								onChange={onChangeTM}
+								style={{
+									width: 300,
+									marginTop: '30px'
+								}}
+							>
+								<Option value="alugada">Alugada</Option>
+								<Option value="propria">Própria</Option>
+							</Select>
 
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<BulbOutlined />}
-								title="Estado lâmpada"
-								style={{ marginBottom: '10px' }}
+							<Input 
+								style={{ width: 300, marginTop: '30px' }}
+								name="renda"
+								placeholder="Informe a renda"
+								onChange={onChangeRenda}
+								value={dados.renda}  
 							/>
 
-							{dadosPlaca1.luminosidade >= 750 ? 
-								<p style={{ color: 'green' }}>Lâmpada acesa. Temperatura controlada!</p>							
-								:
-								<p style={{ color: 'red' }}>Lâmpada apagada. Verifique a placa!</p> 
-							}
-							
-
-						</Card>
-					</Col>
-
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<RedoOutlined />}
-								title="Volume Atual"
-								style={{ marginBottom: '10px' }}
+							<Select
+								placeholder="Informe o tipo de renda"
+								name="tipoRenda"
+								onChange={onChangeTR}
+								style={{
+									width: 300,
+									marginTop: '30px'
+								}}
+								options={[
+									{
+										value: 'formal',
+										label: 'Formal',
+									},
+									{
+										value: 'informal',
+										label: 'Informal',
+									},
+								]}
 							/>
 
-							<p>Volume em {dadosPlaca1.distancia}m³.</p>
+						</Col>
 
-						</Card>
-					</Col>
+					</Row>
 
-				</Row>
+
+					<Button type="submit" variant="contained" color="primary" style={{ marginTop: 25 }} icon={<CheckOutlined />}>
+						Analisar
+					</Button>
+
+				</form>
+
 			</div>
-
-			<Divider />
-
-			<div style={{ marginTop: '30px'}}>	
-
-				<h3>Placa secundária</h3>		
-
-				<Row gutter={16}>
-
-
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<FormOutlined />}
-								title="Controle de volume"
-								style={{ marginBottom: '10px' }}
-							/>
-
-							{dadosPlaca2.distancia <= 5 ? <p style={{ color: 'red' }}><b>Volume inferior a 5 m³. Nivel crítico!</b></p> : <p style={{ color: 'green' }}>Volume em bom nível!</p>}
-
-						</Card>
-					</Col>
-
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<BulbOutlined />}
-								title="Estado lâmpada"
-								style={{ marginBottom: '10px' }}
-							/>
-
-							{dadosPlaca2.luminosidade <= 100 ? 
-								<p style={{ color: 'green' }}>Lâmpada acesa. Temperatura controlada!</p>							
-								:
-								<p style={{ color: 'red' }}>Lâmpada apagada. Verifique a placa!</p> 
-							}
-							
-
-						</Card>
-					</Col>
-
-					<Col span={8}>
-						<Card style={{ width: 300 }} bordered={true}>
-							<Meta
-								avatar={<RedoOutlined />}
-								title="Volume Atual"
-								style={{ marginBottom: '10px' }}
-							/>
-
-							<p>Volume em {dadosPlaca2.distancia}m³.</p>
-
-						</Card>
-					</Col>
-
-				</Row>
-			</div>		
 
 		</div>
 	);
