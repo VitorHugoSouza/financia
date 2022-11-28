@@ -6,7 +6,7 @@ import Meta from 'antd/lib/card/Meta';
 import './Monitoramento.css';
 
 const formAnalise = {
-	dataNascimento: '',
+	idade: '',
 	sexo: '',
 	moradia: '',
 	renda: '',
@@ -18,8 +18,13 @@ export default function Monitoramento() {
 	const { Option } = Select;
 	const [dados, setDados] = useState(formAnalise);
 
+	function onChangeDados(e) {
+		const {name, input} = e.target;
+		setDados({...dados, [name]:input});
+	}
+
 	function onChangeDN(e) {
-		setDados({...dados, dataNascimento:e.target.value});
+		setDados({...dados, idade:e.target.value});
 	}
 
 	function onChangeSexo(e) {
@@ -65,27 +70,28 @@ export default function Monitoramento() {
 
 							<Input 
 								style={{ width: 300 }}
-								name="dataNascimento"
-								placeholder="Informe a data de nascimento"
-								onChange={onChangeDN}
-								value={dados.dataNascimento} 
+								name="idade"
+								placeholder="Informe a idade"
+								onChange={onChangeDados}
+								value={dados.idade} 
 							/>
 
 							<Select
 								placeholder="Informe o sexo"
 								name="sexo"
-								onChange={onChangeSexo}
+								onChange={onChangeDados}
 								style={{
 									width: 300,
 									marginTop: '30px'
 								}}
 							>
-								<Option value="feminino">Feminino</Option>
-								<Option value="masculino">Masculino</Option>
+								<Option value="0">Não informado</Option>
+								<Option value="1">Feminino</Option>
+								<Option value="2">Masculino</Option>
 							</Select>
 
 							<Select
-								placeholder="Informe o tipo de moradia"
+								placeholder="Informe o estado civil"
 								name="moradia"
 								onChange={onChangeTM}
 								style={{
@@ -103,27 +109,7 @@ export default function Monitoramento() {
 								placeholder="Informe a renda"
 								onChange={onChangeRenda}
 								value={dados.renda}  
-							/>
-
-							<Select
-								placeholder="Informe o tipo de renda"
-								name="tipoRenda"
-								onChange={onChangeTR}
-								style={{
-									width: 300,
-									marginTop: '30px'
-								}}
-								options={[
-									{
-										value: 'formal',
-										label: 'Formal',
-									},
-									{
-										value: 'informal',
-										label: 'Informal',
-									},
-								]}
-							/>
+							/>							
 
 						</Col>
 

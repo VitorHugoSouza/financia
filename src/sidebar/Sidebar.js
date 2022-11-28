@@ -25,7 +25,7 @@ export default function Sidebar() {
 
 			</Header>
 
-			<Content style={{ padding: '0 50px' }}>
+			<Content style={{ padding: '0 30px' }}>
 
 				<div className="site-layout-content">
 					<Monitoramento />
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
 			</Content>
 
-			<Footer style={{ textAlign: 'center' }}>Vitor Hugo de Souza ©2022</Footer>
+			<Footer style={{ textAlign: 'center' }}>Financ.ia ©2022</Footer>
 
 		</Layout>
 	);
